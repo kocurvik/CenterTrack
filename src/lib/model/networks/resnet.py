@@ -113,13 +113,13 @@ resnet_spec = {18: (BasicBlock, [2, 2, 2, 2]),
 class PoseResNet(nn.Module):
 
     def __init__(self, num_layers, heads, head_convs, opt=None):
-        super(PoseResNet, self).__init__(heads, head_convs, 1, 64)
+        super(PoseResNet, self).__init__()
         block, layers = resnet_spec[num_layers]
         self.inplanes = 64
         self.deconv_with_bias = False
         self.heads = heads
 
-        super(PoseResNet, self).__init__()
+        # super(PoseResNet, self).__init__()
         self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
                                bias=False)
         self.bn1 = nn.BatchNorm2d(64, momentum=BN_MOMENTUM)
