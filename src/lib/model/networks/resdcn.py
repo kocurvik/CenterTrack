@@ -21,6 +21,8 @@ try:
         from .DCNv2.dcn_v2 import DCN
     else:
         from dcn_v2 import DCN
+except:
+  print('Import DCN failed')
   DCN = None
 import torch.utils.model_zoo as model_zoo
 from .base_model import BaseModel
