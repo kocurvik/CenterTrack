@@ -181,9 +181,13 @@ class GenericDataset(data.Dataset):
     # If training, random sample nearby frames as the "previoud" frame
     # If testing, get the exact prevous frame
     if 'train' in self.split:
+      # img_ids = [(img_info['id'], img_info['frame_id']) \
+      #     for img_info in img_infos \
+      #     if abs(img_info['frame_id'] - frame_id) < self.opt.max_frame_dist and \
+      #     (not ('sensor_id' in img_info) or img_info['sensor_id'] == sensor_id)]
       img_ids = [(img_info['id'], img_info['frame_id']) \
           for img_info in img_infos \
-          if abs(img_info['frame_id'] - frame_id) < self.opt.max_frame_dist and \
+          if 0 < frame_id - img_info['frame_id'] < self.opt.max_frame_dist and \
           (not ('sensor_id' in img_info) or img_info['sensor_id'] == sensor_id)]
     else:
       img_ids = [(img_info['id'], img_info['frame_id']) \
@@ -198,6 +202,7 @@ class GenericDataset(data.Dataset):
     rand_id = np.random.choice(len(img_ids))
     img_id, pre_frame_id = img_ids[rand_id]
     frame_dist = abs(frame_id - pre_frame_id)
+    print(pre_frame_id, frame_id)
     img, anns, _, _ = self._load_image_anns(img_id, self.coco, self.img_dir)
     return img, anns, frame_dist
 
