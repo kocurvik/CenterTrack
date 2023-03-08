@@ -202,7 +202,6 @@ class GenericDataset(data.Dataset):
     rand_id = np.random.choice(len(img_ids))
     img_id, pre_frame_id = img_ids[rand_id]
     frame_dist = abs(frame_id - pre_frame_id)
-    print(pre_frame_id, frame_id)
     img, anns, _, _ = self._load_image_anns(img_id, self.coco, self.img_dir)
     return img, anns, frame_dist
 
