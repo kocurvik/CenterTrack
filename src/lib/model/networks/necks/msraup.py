@@ -17,10 +17,7 @@ import torch
 import torch.nn as nn
 
 try:
-    if os.name == 'nt':
-        from .DCNv2.dcn_v2 import DCN
-    else:
-        from dcn_v2 import DCN
+    from dcn_v2 import DCN
 except:
   print('import DCN failed')
   DCN = None
