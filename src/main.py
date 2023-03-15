@@ -50,7 +50,7 @@ def main(opt):
   if opt.val_intervals < opt.num_epochs or opt.test:
     print('Setting up validation data...')
     val_loader = torch.utils.data.DataLoader(
-      Dataset(opt, 'val'), batch_size=1, shuffle=False, num_workers=1,
+      Dataset(opt, 'val'), batch_size=opt.batch_size, shuffle=False, num_workers=1,
       pin_memory=True)
 
     if opt.test:
