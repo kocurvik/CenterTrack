@@ -19,7 +19,11 @@ class CustomDataset(GenericDataset):
       'custom_dataset_img_path, custom_dataset_ann_path, num_classes, ' + \
       'input_h, input_w.'
     img_dir = opt.custom_dataset_img_path
-    ann_path = opt.custom_dataset_ann_path
+
+    if split == 'val':
+      ann_path = opt.custom_dataset_val_ann_path
+    else:
+      ann_path = opt.custom_dataset_ann_path
     self.num_categories = opt.num_classes
     # self.class_name = ['' for _ in range(self.num_categories)]
     self.class_name = ['' for _ in range(self.num_categories)]

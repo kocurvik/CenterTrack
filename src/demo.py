@@ -48,8 +48,7 @@ def demo(opt):
   if opt.save_video:
     # fourcc = cv2.VideoWriter_fourcc(*'XVID')
     fourcc = cv2.VideoWriter_fourcc(*'H264')
-    out = cv2.VideoWriter('../results/{}.mp4'.format(
-      opt.exp_id + '_' + out_name),fourcc, opt.save_framerate, (
+    out = cv2.VideoWriter('../results/{}.mp4'.format(opt.exp_id + '_' + out_name),fourcc, opt.save_framerate, (
         opt.video_w, opt.video_h))
   
   if opt.debug < 5:
@@ -76,7 +75,6 @@ def demo(opt):
       # skip the first X frames of the video
       if cnt < opt.skip_first:
         continue
-      
       cv2.imshow('input', img)
 
       # track or detect the image.
