@@ -21,7 +21,7 @@ class CustomDataset(GenericDataset):
     img_dir = opt.custom_dataset_img_path
 
     if split == 'val':
-      ann_path = opt.custom_dataset_val_ann_path
+      ann_path = opt.custom_dataset_ann_val_path
     else:
       ann_path = opt.custom_dataset_ann_path
     self.num_categories = opt.num_classes
