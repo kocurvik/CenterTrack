@@ -5,11 +5,11 @@ from __future__ import print_function
 from ..generic_dataset import GenericDataset
 
 class CustomDataset(GenericDataset):
-  num_categories = 7
+  num_categories = 9
   default_resolution = [-1, -1]
-  class_name = ['MotorBike', 'DHelmet', 'DNohelmet', 'P1Helmet', 'P1NoHelmet', 'P2Helmet', 'P2NoHelmet']
+  class_name = ['MotorBike', 'DHelmet', 'DNohelmet', 'P1Helmet', 'P1NoHelmet', 'P2Helmet', 'P2NoHelmet', 'P0Helmet', 'P0NoHelmet']
   max_objs = 128
-  cat_ids = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7}
+  cat_ids = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9}
   def __init__(self, opt, split):
     assert (opt.custom_dataset_img_path != '') and \
       (opt.custom_dataset_ann_path != '') and \
