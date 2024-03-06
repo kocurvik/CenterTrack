@@ -77,6 +77,7 @@ class FastFocalLoss(nn.Module):
   def __init__(self, opt=None):
     super(FastFocalLoss, self).__init__()
     self.only_neg_loss = _only_neg_loss
+    self.register_buffer('weights', torch.tensor([1.0, 1.3, 5.0, 365.7, 7.3, 445.5, 445.5, 228.6, 228.6]))
 
   def forward(self, out, target, ind, mask, cat):
     '''
@@ -85,12 +86,14 @@ class FastFocalLoss(nn.Module):
       ind, mask: B x M
       cat (category id for peaks): B x M
     '''
+    print("Cat:", torch.max(cat).item())
     neg_loss = self.only_neg_loss(out, target)
     pos_pred_pix = _tranpose_and_gather_feat(out, ind) # B x M x C
     pos_pred = pos_pred_pix.gather(2, cat.unsqueeze(2)) # B x M
+    w = self.weights[cat.unsqueeze(2)]
     num_pos = mask.sum()
     pos_loss = torch.log(pos_pred) * torch.pow(1 - pos_pred, 2) * \
-               mask.unsqueeze(2)
+               mask.unsqueeze(2) * w
     pos_loss = pos_loss.sum()
     if num_pos == 0:
       return - neg_loss
